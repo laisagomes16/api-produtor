@@ -9,6 +9,7 @@ public class ProdutorDto {
 
     @NotBlank(message = "Nome obrigatorio!")
     private String nome;
+
     private LocalDateTime dataInicial;
     private LocalDateTime dataFinal;
     @NotBlank(message = "CNPJ obrigatorio!")

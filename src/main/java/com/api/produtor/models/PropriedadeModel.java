@@ -2,6 +2,7 @@ package com.api.produtor.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Table(name = "propriedade")
@@ -11,7 +12,7 @@ public class PropriedadeModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     private String nome;
 
     public Integer getId() {

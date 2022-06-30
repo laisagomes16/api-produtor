@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
+
+
 
 @Entity
 @Table(name = "produtor")
@@ -16,7 +19,7 @@ public class ProdutorModel implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 20)
+    @Column(nullable = false, length = 20)
     private String nome;
 
     @Convert(converter = LocalDateAttributeConverter.class)
@@ -27,7 +30,7 @@ public class ProdutorModel implements Serializable {
     @Column(nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime dataFinal;
 
-    @Column(nullable = false, unique = true, length = 18)
+    @Column(nullable = false, length = 18)
     private String cnpj;
 
     @Column(nullable = false, length = 100)
@@ -39,7 +42,7 @@ public class ProdutorModel implements Serializable {
     private LaboratorioModel laboratorio;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "propriedade_id", nullable = false)
+    @JoinColumn(name = "propriedades_id", nullable = false)
     @JsonIgnoreProperties(value = {"applications", "hibernateLazyInitializer"})
     private PropriedadeModel infosPropriedade;
 

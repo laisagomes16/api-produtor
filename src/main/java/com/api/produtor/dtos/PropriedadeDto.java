@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 public class PropriedadeDto {
     @NotBlank
     private  Integer id;
+
     @NotBlank
     private String nome;
 
