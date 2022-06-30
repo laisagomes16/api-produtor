@@ -33,25 +33,13 @@ public class ProdutorController {
 
     @PostMapping
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ProdutorDto produtorDto){
-       /* if(produtorService.existsByLicensePlateCar(produtorDto.getLicensePlateCar())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: License Plate Car is already in use!");
-        }
-        if(produtorService.existsByParkingSpotNumber(parkingSpotDto.getParkingSpotNumber())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot is already in use!");
-        }
-        if(produtorService.existsByApartmentAndBlock(parkingSpotDto.getApartment(), parkingSpotDto.getBlock())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot already registered for this apartment/block!");
-        }*/
-        //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teste Laisa msg" + produtorDto.getLaboratorio().getLabNome());
         var produtorModel = new ProdutorModel();
         var laboratorioModel = new LaboratorioModel();
         var propriedadeModel = new PropriedadeModel();
         BeanUtils.copyProperties(produtorDto, produtorModel);
         BeanUtils.copyProperties(produtorDto.getLaboratorio(), laboratorioModel);
         BeanUtils.copyProperties(produtorDto.getInfosPropriedade(), propriedadeModel);
-        //produtorModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        //return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Teste Laisa msg" + laboratorioModel.getLabNome());
         produtorModel.setLaboratorio(laboratorioModel);
         produtorModel.setInfosPropriedade(propriedadeModel);
         return ResponseEntity.status(HttpStatus.CREATED).body(produtorService.save(produtorModel));
@@ -91,9 +79,16 @@ public class ProdutorController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produtor not found.");
         }
         var produtorModel = new ProdutorModel();
+        var laboratorioModel = new LaboratorioModel();
+        var propriedadeModel = new PropriedadeModel();
         BeanUtils.copyProperties(produtorDto, produtorModel);
+        BeanUtils.copyProperties(produtorDto.getLaboratorio(), laboratorioModel);
+        BeanUtils.copyProperties(produtorDto.getInfosPropriedade(), propriedadeModel);
+
         produtorModel.setId(produtorModelOptional.get().getId());
-        //parkingSpotModel.setRegistrationDate(parkingSpotModelOptional.get().getRegistrationDate());
+        produtorModel.setLaboratorio(laboratorioModel);
+        produtorModel.setInfosPropriedade(propriedadeModel);
+
         return ResponseEntity.status(HttpStatus.OK).body(produtorService.save(produtorModel));
     }
 
