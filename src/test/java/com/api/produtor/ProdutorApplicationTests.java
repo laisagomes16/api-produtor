@@ -19,32 +19,5 @@ class ProdutorApplicationTests {
 	void contextLoads() {
 	}
 
-	@Autowired
-	private ProdutorRepository produtorRepository;
-
-	@Test
-	public void insertProdutor() {
-		ProdutorModel produtorModel = new ProdutorModel();
-		produtorModel.setNome("Nome teste");
-		produtorModel.setCnpj("22.222.221/0001-11");
-		produtorModel.setDataInicial(LocalDateTime.parse("2022-02-02T17:41:44"));
-		produtorModel.setDataFinal(LocalDateTime.parse("2022-02-02T17:41:44"));
-
-		PropriedadeModel propriedadeModel = new PropriedadeModel();
-		propriedadeModel.setId(1);
-		propriedadeModel.setNome("fazenda sao joao 1");
-
-		produtorModel.setInfosPropriedade(propriedadeModel);
-
-		LaboratorioModel laboratorioModel = new LaboratorioModel();
-		laboratorioModel.setId(1);
-		propriedadeModel.setNome("laboratorio 1");
-
-		produtorModel.setLaboratorio(laboratorioModel);
-
-		produtorRepository.save(produtorModel);
-		Integer countProdutor = produtorRepository.findAll().size();
-		Assertions.assertEquals(1, countProdutor);
-	}
 
 }
